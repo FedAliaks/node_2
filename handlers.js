@@ -2,7 +2,8 @@ const controller = require('./controllers')
 
 
 const handlersURL = {
-    '/sum': controller.sum
+    '/sum': controller.sum,
+    '/api/articles/readall': controller.readAllArticles
 }
 
 function getHandler(url) {
