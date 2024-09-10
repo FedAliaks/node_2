@@ -95,6 +95,14 @@ function deleteArticle(req, res, articleArr, paramsObj) {
   helper.writeFileWithArticles(req, res, JSON.stringify(arr), "delete article");
 }
 
+function createComment(req, res, articleArr, paramsObj) {
+  res.end('create comment')
+}
+
+function deleteComment(req, res, articleArr, paramsObj) {
+  res.end('delete comment')
+}
+
 module.exports = {
   sum,
   pageNotFound,
@@ -103,4 +111,6 @@ module.exports = {
   createNewArticle,
   updateArticle,
   deleteArticle,
+  createComment,
+  deleteComment
 };
