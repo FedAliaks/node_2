@@ -96,11 +96,49 @@ function deleteArticle(req, res, articleArr, paramsObj) {
 }
 
 function createComment(req, res, articleArr, paramsObj) {
-  res.end('create comment')
+  console.log("create comment");
+  console.log(paramsObj.commentId);
+  console.log(paramsObj);
+
+  helper.parseBodyJson(req, (err, bodyRequest) => {
+    const id = paramsObj.commentId;
+
+    let newComment;
+    const arr = articleArr.map((item) => {
+      if (item.id == id) {
+        newComment = {
+          id: item.comments.length + 1,
+          articleId: item.id,
+          text: bodyRequest.text || "default comment",
+          date: bodyRequest.text || "default comment",
+          author: bodyRequest.text || "default comment",
+        };
+
+        return {
+          id: item.id,
+          title: item.title,
+          text: item.text,
+          date: item.date,
+          author: item.author,
+          comments: [...item.comments, newComment],
+        };
+      }
+      return item;
+    });
+
+    helper.writeFileWithArticles(
+      req,
+      res,
+      JSON.stringify(arr),
+      JSON.stringify(newComment),
+    );
+  });
+
+  res.end("create comment");
 }
 
 function deleteComment(req, res, articleArr, paramsObj) {
-  res.end('delete comment')
+  res.end("delete comment");
 }
 
 module.exports = {
@@ -112,5 +150,5 @@ module.exports = {
   updateArticle,
   deleteArticle,
   createComment,
-  deleteComment
+  deleteComment,
 };

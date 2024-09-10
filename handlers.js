@@ -7,8 +7,8 @@ const handlersURL = {
   "/api/articles/create": controller.createNewArticle,
   "/api/articles/update": controller.updateArticle,
   "/api/articles/delete": controller.deleteArticle,
-  '/api/comments/create': controller.createComment,
-  '/api/comments/delete': controller.deleteComment
+  "/api/comments/create": controller.createComment,
+  "/api/comments/delete": controller.deleteComment,
 };
 
 function getHandler(url) {

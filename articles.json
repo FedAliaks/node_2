@@ -12,6 +12,20 @@
         "text": "Comment 1",
         "date": "02.09.2024",
         "author": "Author Comment 1"
+      },
+      {
+        "id": 2,
+        "articleId": 1,
+        "text": "new comment",
+        "date": "new comment",
+        "author": "new comment"
+      },
+      {
+        "id": 3,
+        "articleId": 1,
+        "text": "new comment111111111",
+        "date": "new comment111111111",
+        "author": "new comment111111111"
       }
     ]
   },
