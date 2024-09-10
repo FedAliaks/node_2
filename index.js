@@ -1,6 +1,7 @@
 const http = require('http');
 const helper = require('./helpers')
 const handler = require('./handlers')
+const fs = require('fs')
 
 const port = 3000;
 const host = '127.0.0.1';
@@ -26,8 +27,50 @@ const server = http.createServer((req, res) => {
         })
 
     } else {
-        const handlerURL = handler.getHandler(req.url)
-        handlerURL(req, res)
+        const [url, queryParams] = req.url.split('?')
+        let articleId = null
+        console.log(url)
+        if(queryParams) {
+            queryParams.split('&').forEach((item) => {
+                const [key, value] = item.split('=');
+                if (key == 'id') articleId = value;
+            })
+        }
+
+        console.log('url');
+        console.log(url);
+        console.log('id');
+        console.log(articleId)
+
+        const readableStream = fs.createReadStream('./articles.json');
+        const body = [];
+        readableStream.on('data', (chunk) => {
+            body.push(chunk)
+        }).on('end', () => {
+            articlesArr = JSON.parse(body.join('').toString())
+            console.log(articlesArr)
+            const handlerURL = handler.getHandler(url)
+            handlerURL(req, res, articlesArr, articleId)
+
+
+
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*         const handlerURL = handler.getHandler(req.url)
+        handlerURL(req, res) */
 
     }
 
