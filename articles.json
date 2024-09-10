@@ -1,22 +1,6 @@
 [
   {
     "id": 1,
-    "title": "updated title",
-    "text": "updated text",
-    "date": "updated date",
-    "author": "Author 1",
-    "comments": [
-      {
-        "id": 1,
-        "articleId": 1,
-        "text": "Comment 1",
-        "date": "01.09.2024",
-        "author": "Author Comment 1"
-      }
-    ]
-  },
-  {
-    "id": 2,
     "title": "Article 2",
     "text": "Content for article 2",
     "date": "01.09.2024",
@@ -32,7 +16,7 @@
     ]
   },
   {
-    "id": 3,
+    "id": 2,
     "title": "Article 1asdfasdfasdfasdf",
     "text": "Content for article 1",
     "date": "01.09.2024",

@@ -76,6 +76,25 @@ function updateArticle(req, res, articleArr, paramsObj) {
   res.end("update article");
 }
 
+function deleteArticle(req, res, articleArr, paramsObj) {
+  let currentNewId = 1;
+
+  const arr = articleArr
+    .filter((item) => item.id != paramsObj.articleId)
+    .map((item) => {
+      return {
+        id: currentNewId++,
+        title: item.title,
+        text: item.text,
+        date: item.date,
+        author: item.author,
+        comments: item.comments,
+      };
+    });
+
+  helper.writeFileWithArticles(req, res, JSON.stringify(arr), "delete article");
+}
+
 module.exports = {
   sum,
   pageNotFound,
@@ -83,4 +102,5 @@ module.exports = {
   readArticlesId,
   createNewArticle,
   updateArticle,
+  deleteArticle,
 };

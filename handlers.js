@@ -6,6 +6,7 @@ const handlersURL = {
   "/api/articles/read": controller.readArticlesId,
   "/api/articles/create": controller.createNewArticle,
   "/api/articles/update": controller.updateArticle,
+  "/api/articles/delete": controller.deleteArticle,
 };
 
 function getHandler(url) {
