@@ -1,3 +1,6 @@
+const fs = require("fs");
+const path = require("path");
+
 function parseBodyJson(req, cb) {
   let body = [];
 
@@ -12,6 +15,16 @@ function parseBodyJson(req, cb) {
     });
 }
 
+function writeFileWithArticles(req, res, body, answerRes) {
+  const pathFile = path.join(__dirname, "articles.json");
+  const writeStream = fs.createWriteStream("./articles.json");
+
+  writeStream.write(body);
+  writeStream.close();
+  res.end(answerRes || "end response");
+}
+
 module.exports = {
   parseBodyJson,
+  writeFileWithArticles,
 };
