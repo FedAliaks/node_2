@@ -30,5 +30,21 @@
         "author": "Author Comment 1"
       }
     ]
+  },
+  {
+    "id": 3,
+    "title": "Article 1asdfasdfasdfasdf",
+    "text": "Content for article 1",
+    "date": "01.09.2024",
+    "author": "Author 1",
+    "comments": [
+      {
+        "id": 1,
+        "articleId": 1,
+        "text": "Comment 1",
+        "date": "01.09.2024",
+        "author": "Author Comment 1"
+      }
+    ]
   }
 ]

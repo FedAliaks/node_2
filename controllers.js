@@ -1,8 +1,6 @@
 const fs = require("fs");
 const helper = require("./helpers");
 
-let newArticleId = 3;
-
 function sum(req, res, payload, cb) {
   const result = {
     c: payload.a + payload.b,
@@ -32,7 +30,23 @@ function createNewArticle(req, res, articlesArr) {
 
   helper.parseBodyJson(req, (err, bodyRequest) => {
     console.log(bodyRequest);
-    res.end("add new article");
+
+    const newArticle = {
+      id: articlesArr.length + 1,
+      title: bodyRequest.title || "default title",
+      text: bodyRequest.text || "default text",
+      date: bodyRequest.date || "default date",
+      author: bodyRequest.author || "default title",
+      comments: bodyRequest.comments || [],
+    };
+
+    const newArticlesArr = [...articlesArr, newArticle];
+    helper.writeFileWithArticles(
+      req,
+      res,
+      JSON.stringify(newArticlesArr),
+      JSON.stringify(newArticle),
+    );
   });
 }
 
