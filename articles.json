@@ -1,9 +1,9 @@
 [
   {
     "id": 1,
-    "title": "Article 1",
-    "text": "Content for article 1",
-    "date": "01.09.2024",
+    "title": "updated title",
+    "text": "updated text",
+    "date": "updated date",
     "author": "Author 1",
     "comments": [
       {

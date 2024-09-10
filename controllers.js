@@ -50,10 +50,37 @@ function createNewArticle(req, res, articlesArr) {
   });
 }
 
+function updateArticle(req, res, articleArr, paramsObj) {
+  helper.parseBodyJson(req, (err, bodyRequest) => {
+    const arr = articleArr.map((item) =>
+      item.id != paramsObj.articleId
+        ? item
+        : {
+            id: item.id,
+            title: bodyRequest.title || item.title,
+            text: bodyRequest.text || item.text,
+            date: bodyRequest.date || item.date,
+            author: bodyRequest.author || item.author,
+            comments: item.comments,
+          },
+    );
+
+    helper.writeFileWithArticles(
+      req,
+      res,
+      JSON.stringify(arr),
+      "article has updated",
+    );
+  });
+
+  res.end("update article");
+}
+
 module.exports = {
   sum,
   pageNotFound,
   readAllArticles,
   readArticlesId,
   createNewArticle,
+  updateArticle,
 };

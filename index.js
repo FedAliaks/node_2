@@ -28,13 +28,13 @@ const server = http.createServer((req, res) => {
     paramsObj = {
       articleId: null,
       commentId: null,
-    }
+    };
     console.log(url);
     if (queryParams) {
       queryParams.split("&").forEach((item) => {
         const [key, value] = item.split("=");
         if (key == "id") paramsObj.articleId = value;
-        if (key == "commentId") paramsObj.commentId = value
+        if (key == "commentId") paramsObj.commentId = value;
       });
     }
 
@@ -51,7 +51,9 @@ const server = http.createServer((req, res) => {
       })
       .on("end", () => {
         articlesArr = JSON.parse(body.join("").toString());
-        console.log(articlesArr);
+        /*         console.log(articlesArr); */
+        console.log("url");
+        console.log(url);
         const handlerURL = handler.getHandler(url);
         handlerURL(req, res, articlesArr, paramsObj);
       });
