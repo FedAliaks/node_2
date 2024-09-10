@@ -17,8 +17,8 @@ function readAllArticles(req, res, articlesArr) {
   res.end(JSON.stringify(articlesArr));
 }
 
-function readArticlesId(rea, res, articlesArr, id) {
-  const article = articlesArr.filter((item) => item.id == id);
+function readArticlesId(rea, res, articlesArr, paramsObj) {
+  const article = articlesArr.filter((item) => item.id == paramsObj.articleId);
 
   article.length > 0
     ? res.end(JSON.stringify(article[0]))
