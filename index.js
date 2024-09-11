@@ -2,6 +2,9 @@ const http = require("http");
 const helper = require("./helpers");
 const handler = require("./handlers");
 const fs = require("fs");
+const log = require('npmlog');
+
+
 
 const port = 3000;
 const host = "127.0.0.1";
@@ -64,5 +67,8 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`server is available at ${host}:${port}`);
+  log.info('INFO', 'Server is available', {'url': '127.0.1.0:3000', date: new Date()});
 });
+
+
+/* log.info('INFO', 'Hello', {'message': 'test'}) */
