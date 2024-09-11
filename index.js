@@ -49,11 +49,11 @@ const server = http.createServer((req, res) => {
         articlesArr = JSON.parse(body.join("").toString());
 
         const handlerURL = handler.getHandler(url);
-        handlerURL(req, res, articlesArr, paramsObj);
-      });
 
-    /*         const handlerURL = handler.getHandler(req.url)
-        handlerURL(req, res) */
+        helper.validationRequest(url, articlesArr, paramsObj)
+          ? handlerURL(req, res, articlesArr, paramsObj)
+          : helper.requestError(req, res);
+      });
   }
 });
 
@@ -63,5 +63,3 @@ server.listen(port, host, () => {
     date: new Date(),
   });
 });
-
-/* log.info('INFO', 'Hello', {'message': 'test'}) */
