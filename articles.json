@@ -1,37 +1,30 @@
 [
   {
     "id": 1,
-    "title": "Article 2",
-    "text": "Content for article 2",
+    "title": "Article 1asdfasdfasdfasdf",
+    "text": "Content for article 1",
     "date": "01.09.2024",
-    "author": "Author 2",
+    "author": "Author 1",
     "comments": [
       {
         "id": 1,
         "articleId": 1,
         "text": "Comment 1",
-        "date": "02.09.2024",
+        "date": "01.09.2024",
         "author": "Author Comment 1"
       },
       {
         "id": 2,
         "articleId": 1,
-        "text": "new comment",
-        "date": "new comment",
-        "author": "new comment"
-      },
-      {
-        "id": 3,
-        "articleId": 1,
-        "text": "new comment111111111",
-        "date": "new comment111111111",
-        "author": "new comment111111111"
+        "text": "99999999999999999",
+        "date": "99999999999999999",
+        "author": "99999999999999999"
       }
     ]
   },
   {
     "id": 2,
-    "title": "Article 1asdfasdfasdfasdf",
+    "title": "Articasdfasdfasdfasdfasdfasdfadfadfle 1asdfasdfasdfasdf",
     "text": "Content for article 1",
     "date": "01.09.2024",
     "author": "Author 1",

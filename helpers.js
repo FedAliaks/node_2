@@ -1,6 +1,4 @@
 const fs = require("fs");
-const path = require("path");
-const handler = require("./handlers");
 const log = require("npmlog");
 
 function parseBodyJson(req, cb) {
@@ -18,7 +16,6 @@ function parseBodyJson(req, cb) {
 }
 
 function writeFileWithArticles(req, res, body, answerRes) {
-  const pathFile = path.join(__dirname, "articles.json");
   const writeStream = fs.createWriteStream("./articles.json");
 
   writeStream.write(body);
@@ -45,7 +42,8 @@ function validationRequest(url, articleArr, paramsObj) {
         paramsObj.articleId &&
         paramsObj.articleId <= articleArr.length &&
         paramsObj.commentId &&
-        paramsObj.commentId <= articleArr[articleId].length
+        paramsObj.commentId <=
+          articleArr[paramsObj.articleId - 1].comments.length
       );
       break;
     default:

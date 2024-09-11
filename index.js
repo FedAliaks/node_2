@@ -35,7 +35,8 @@ const server = http.createServer((req, res) => {
       queryParams.split("&").forEach((item) => {
         const [key, value] = item.split("=");
         if (key == "id") paramsObj.articleId = value;
-        if (key == "articleId") paramsObj.commentId = value;
+        if (key == "articleId") paramsObj.articleId = value;
+        if (key == "commentId") paramsObj.commentId = value;
       });
     }
 
