@@ -1,9 +1,9 @@
 const fs = require("fs");
 const helper = require("./helpers");
-const log = require('npmlog');
+const log = require("npmlog");
 
 function sum(req, res, payload, cb) {
-  log.info('INFO', 'SUM', {url: req.url, date: new Date(), payload: payload});
+  log.info("INFO", "SUM", { url: req.url, date: new Date(), payload: payload });
   const result = {
     c: payload.a + payload.b,
   };
@@ -12,17 +12,17 @@ function sum(req, res, payload, cb) {
 }
 
 function pageNotFound(req, res, payload, cb) {
-  log.info('ERROR', 'Page Not Found', {url: req.url, date: new Date()});
+  log.info("ERROR", "Page Not Found", { url: req.url, date: new Date() });
   cb({ code: 404, message: "Page not found" });
 }
 
 function readAllArticles(req, res, articlesArr) {
-  log.info('INFO', 'Read all articles', {url: req.url, date: new Date()});
+  log.info("INFO", "Read all articles", { url: req.url, date: new Date() });
   res.end(JSON.stringify(articlesArr));
 }
 
 function readArticlesId(req, res, articlesArr, paramsObj) {
-  log.info('INFO', 'Read article Id', {url: req.url, date: new Date()});
+  log.info("INFO", "Read article Id", { url: req.url, date: new Date() });
   const article = articlesArr.filter((item) => item.id == paramsObj.articleId);
 
   article.length > 0
@@ -31,11 +31,12 @@ function readArticlesId(req, res, articlesArr, paramsObj) {
 }
 
 function createNewArticle(req, res, articlesArr) {
-  console.log("create new article");
-
   helper.parseBodyJson(req, (err, bodyRequest) => {
-    log.info('INFO', 'Add new article', {url: req.url, date: new Date(), payload: newArticle});
-    console.log(bodyRequest);
+    log.info("INFO", "Add new article", {
+      url: req.url,
+      date: new Date(),
+      payload: newArticle,
+    });
 
     const newArticle = {
       id: articlesArr.length + 1,
@@ -53,13 +54,16 @@ function createNewArticle(req, res, articlesArr) {
       JSON.stringify(newArticlesArr),
       JSON.stringify(newArticle),
     );
-
   });
 }
 
 function updateArticle(req, res, articleArr, paramsObj) {
   helper.parseBodyJson(req, (err, bodyRequest) => {
-    log.info('INFO', 'update Article', {url: req.url, date: new Date(), payload: bodyRequest});
+    log.info("INFO", "update Article", {
+      url: req.url,
+      date: new Date(),
+      payload: bodyRequest,
+    });
     const arr = articleArr.map((item) =>
       item.id != paramsObj.articleId
         ? item
@@ -101,16 +105,16 @@ function deleteArticle(req, res, articleArr, paramsObj) {
     });
 
   helper.writeFileWithArticles(req, res, JSON.stringify(arr), "delete article");
-  log.info('INFO', 'delete article', {url: req.url, date: new Date()});
+  log.info("INFO", "delete article", { url: req.url, date: new Date() });
 }
 
 function createComment(req, res, articleArr, paramsObj) {
-  console.log("create comment");
-  console.log(paramsObj.commentId);
-  console.log(paramsObj);
-
   helper.parseBodyJson(req, (err, bodyRequest) => {
-    log.info('INFO', 'create comment', {url: req.url, date: new Date(), payload: bodyRequest});
+    log.info("INFO", "create comment", {
+      url: req.url,
+      date: new Date(),
+      payload: bodyRequest,
+    });
     const id = paramsObj.commentId;
 
     let newComment;
@@ -148,30 +152,24 @@ function createComment(req, res, articleArr, paramsObj) {
 }
 
 function deleteComment(req, res, articleArr, paramsObj) {
-  log.info('INFO', 'delete comment', {url: req.url, date: new Date()});
-  console.log('delete')
-  console.log(paramsObj)
+  log.info("INFO", "delete comment", { url: req.url, date: new Date() });
 
-
-
-  const arr = articleArr.map(article => {
+  const arr = articleArr.map((article) => {
     let currentIdComment = 1;
-    console.log('here1')
-    console.log(article.id + '   ' + paramsObj.articleId)
+
     if (article.id != paramsObj.articleId) return article;
 
     const updateArticle = article;
-    updateArticle.comments = article.comments.filter(item => item.id != paramsObj.commentId)
-    updateArticle.comments.forEach(item => {
+    updateArticle.comments = article.comments.filter(
+      (item) => item.id != paramsObj.commentId,
+    );
+    updateArticle.comments.forEach((item) => {
       item.id = currentIdComment;
       currentIdComment++;
-    })
-    console.log(article.comments)
-    console.log('here22222222')
-    console.log(updateArticle.comments);
+    });
+
     return updateArticle;
-  })
-  console.log(arr)
+  });
 
   helper.writeFileWithArticles(req, res, JSON.stringify(arr), "delete comment");
 }

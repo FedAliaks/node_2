@@ -2,9 +2,7 @@ const http = require("http");
 const helper = require("./helpers");
 const handler = require("./handlers");
 const fs = require("fs");
-const log = require('npmlog');
-
-
+const log = require("npmlog");
 
 const port = 3000;
 const host = "127.0.0.1";
@@ -17,7 +15,7 @@ const server = http.createServer((req, res) => {
       handlerURL(req, res, payload, (err, result) => {
         if (err) {
           res.statusCode = err.code;
-          console.log(err.message);
+
           res.end(JSON.stringify(err));
           return;
         }
@@ -32,7 +30,7 @@ const server = http.createServer((req, res) => {
       articleId: null,
       commentId: null,
     };
-    console.log(url);
+
     if (queryParams) {
       queryParams.split("&").forEach((item) => {
         const [key, value] = item.split("=");
@@ -40,11 +38,6 @@ const server = http.createServer((req, res) => {
         if (key == "articleId") paramsObj.commentId = value;
       });
     }
-
-    console.log("url");
-    console.log(url);
-    console.log("id");
-    console.log(paramsObj.articleId);
 
     const readableStream = fs.createReadStream("./articles.json");
     const body = [];
@@ -54,9 +47,7 @@ const server = http.createServer((req, res) => {
       })
       .on("end", () => {
         articlesArr = JSON.parse(body.join("").toString());
-        /*         console.log(articlesArr); */
-        console.log("url");
-        console.log(url);
+
         const handlerURL = handler.getHandler(url);
         handlerURL(req, res, articlesArr, paramsObj);
       });
@@ -67,8 +58,10 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(port, host, () => {
-  log.info('INFO', 'Server is available', {'url': '127.0.1.0:3000', date: new Date()});
+  log.info("INFO", "Server is available", {
+    url: "127.0.1.0:3000",
+    date: new Date(),
+  });
 });
-
 
 /* log.info('INFO', 'Hello', {'message': 'test'}) */
