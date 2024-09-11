@@ -138,7 +138,31 @@ function createComment(req, res, articleArr, paramsObj) {
 }
 
 function deleteComment(req, res, articleArr, paramsObj) {
-  res.end("delete comment");
+  console.log('delete')
+  console.log(paramsObj)
+
+
+
+  const arr = articleArr.map(article => {
+    let currentIdComment = 1;
+    console.log('here1')
+    console.log(article.id + '   ' + paramsObj.articleId)
+    if (article.id != paramsObj.articleId) return article;
+
+    const updateArticle = article;
+    updateArticle.comments = article.comments.filter(item => item.id != paramsObj.commentId)
+    updateArticle.comments.forEach(item => {
+      item.id = currentIdComment;
+      currentIdComment++;
+    })
+    console.log(article.comments)
+    console.log('here22222222')
+    console.log(updateArticle.comments);
+    return updateArticle;
+  })
+  console.log(arr)
+
+  helper.writeFileWithArticles(req, res, JSON.stringify(arr), "delete comment");
 }
 
 module.exports = {
